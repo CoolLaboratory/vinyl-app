@@ -1,0 +1,3 @@
+
+
+Vue.mixin(titleMixin)
