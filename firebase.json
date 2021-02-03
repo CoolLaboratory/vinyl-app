@@ -17,33 +17,16 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+      { "source": "**", "destination": "/index.html" }
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
-  },
+  "storage": { "rules": "storage.rules" },
   "emulators": {
-    "auth": {
-      "port": 9099
-    },
-    "functions": {
-      "port": 5001
-    },
-    "firestore": {
-      "port": 8080
-    },
-    "hosting": {
-      "port": 5000
-    },
-    "pubsub": {
-      "port": 8085
-    },
-    "ui": {
-      "enabled": true
-    }
+    "auth": { "port": 9099 },
+    "functions": { "port": 5001 },
+    "firestore": { "port": 8084 },
+    "hosting": { "port": 5000 },
+    "pubsub": { "port": 8085 },
+    "ui": { "enabled": true }
   }
 }
