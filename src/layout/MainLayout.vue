@@ -15,11 +15,12 @@ export default {
     dashboardWindow: null
   }),
   methods: {
+    /** Open the Dashboard page in a new window */
     openDashboard() {
       const windowFeatures = 'menubar=no,toolbar=no,location=no,resizable=yes,scrollbars=yes,status=no'
       
       if(!this.dashboardWindow || this.dashboardWindow.closed)
-        this.dashboardWindow = window.open("http://localhost:8080/dashboard", "VS_Dashboard", windowFeatures)
+        this.dashboardWindow = window.open('/dashboard', "VS_Dashboard", windowFeatures)
       else
         this.dashboardWindow.focus()
     }
