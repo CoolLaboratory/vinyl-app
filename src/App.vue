@@ -5,9 +5,16 @@
   </div>
   <router-view/>
 </template>
-<script>
 
+
+<script>
 export default {
+  inject: ['user'],
+
+  mounted() {
+    console.log(this.user)
+    this.$store.dispatch('getWelcomeMessage')
+  }
 }
 </script>
 

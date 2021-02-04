@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld :msg="message"/>
   </div>
 </template>
 
@@ -14,6 +14,9 @@ export default {
   title: 'Home Page',
   components: {
     HelloWorld
+  },
+  computed: {
+    message() { return this.$store.getters.getMsg }
   }
 }
 </script>
