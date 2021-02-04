@@ -1,4 +1,6 @@
 <template>
+
+
   <div id="nav">
     <router-link to="/browse">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -10,10 +12,15 @@
 
 
 <script>
+
 export default {
+  name: 'MainLayout',
   data: () => ({
     dashboardWindow: null
   }),
+  setup() {
+    document.body.setAttribute('layout', 'main')
+  },
   methods: {
     /** Open the Dashboard page in a new window */
     openDashboard() {

@@ -13,9 +13,13 @@ const routes = [
       }
     ]
   },
-  { 
-    path: '/dashboard', name: 'Dashboard', 
-    component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard.vue') }
+  { path: '/dashboard', 
+    component: () => import(/* webpackChunkName: "dashboard" */ '../layout/DashboardLayout.vue'),
+    children: [
+      {path: '', component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard/Index.vue')},
+      {path: 'users', component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard/Users.vue')}
+    ] 
+  }
 ]
 
 const router = createRouter({
