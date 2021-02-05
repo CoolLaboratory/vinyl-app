@@ -13,6 +13,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# firebase Logs
+ui-debug.log*
+pubsub-debug.log*
+firestore-debug.log*
+
 # Editor directories and files
 .idea
 .vscode
