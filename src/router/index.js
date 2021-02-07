@@ -1,30 +1,29 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import MainLayout from '../layout/MainLayout.vue'
+import routes from './routes'
 
-/**@type {import('vue-router').RouteRecordRaw[]} */
-const routes = [
-  { 
-    path: '/', component: MainLayout, children: [
-      { path: '', redirect: { name: 'Browse' } },
-      { path: 'browse', name: 'Browse', component: Home },
-      { path: 'about', name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-      }
-    ]
-  },
-  { path: '/dashboard', 
-    component: () => import(/* webpackChunkName: "dashboard" */ '../layout/DashboardLayout.vue'),
-    children: [
-      {path: '', component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard/Index.vue')},
-      {path: 'users', component: () => import(/* webpackChunkName: "dashboard" */ '../views/Dashboard/Users.vue')}
-    ] 
+/**@param {{ auth: import('@/main').firebaseAuth }} */
+export const makeVueRouter = ({auth}) => {
+  console.log('makeVueRouter');
+
+
+  /**@type {import('vue-router').RouterOptions}  routerOptions*/
+  const routerOptions = {
+    history: createWebHistory(process.env.BASE_URL),
+    routes
   }
-]
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+  const router = createRouter(routerOptions)
 
-export default router
+  router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      console.log('router:globalGuard');
+      if (!auth.currentUser) {
+        next({ name: 'SignIn', query: { redirect: encodeURI(to.fullPath) } })
+      } else { next() }
+    } else next()
+  }) 
+  
+  return router
+}

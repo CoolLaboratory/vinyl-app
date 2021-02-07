@@ -1,23 +1,20 @@
 <template>
+  <top-app-bar />
+  
+  <router-view class="page" />
 
-
-  <div id="nav">
-    <router-link to="/browse">Home</router-link> |
-    <router-link to="/about">About</router-link>
-
-    <button @click="openDashboard">Dashboard</button>
-  </div>
-  <router-view />
+  <info-bar />
 </template>
 
 
 <script>
+import TopAppBar from '@/components/TopAppBar.vue'
+import InfoBar from '@/components/InfoBar.vue'
 
 export default {
+  components: { TopAppBar, InfoBar },
   name: 'MainLayout',
-  data: () => ({
-    dashboardWindow: null
-  }),
+  data: () => ({ dashboardWindow: null }),
   setup() {
     document.body.setAttribute('layout', 'main')
   },
@@ -39,16 +36,4 @@ export default {
 
 <style lang="scss">
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

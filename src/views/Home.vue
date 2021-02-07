@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <img alt="Vue logo" src="../assets/logo.svg">
     <HelloWorld :msg="message"/>
   </div>
 </template>
@@ -16,7 +16,9 @@ export default {
     HelloWorld
   },
   computed: {
-    message() { return this.$store.getters.getMsg }
+    message() { 
+      return this.$store.getters.getMsg
+    }
   }
 }
 </script>

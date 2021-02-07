@@ -38,16 +38,19 @@ remoteConfig.defaultConfig = {
 }
 
 // export utils/refs
-export default fireApp
-
+export default firebase
+import makeAuthPlugin from './plugin'
 export {
+  firebase,
+  fireApp,
   db,
   auth,
   storage,
   analytics,
   remoteConfig,
-  usersCollection,
+  likesCollection,
   postsCollection,
+  usersCollection,
   commentsCollection,
-  likesCollection
+  makeAuthPlugin,
 }
