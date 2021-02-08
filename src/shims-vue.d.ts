@@ -1,3 +1,4 @@
+import { ComponentCustomOptions } from "vue";
 /* eslint-disable */
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
@@ -8,6 +9,7 @@ declare module '*.vue' {
 declare module "@vue/runtime-core" {
   //Bind to `this` keyword
   interface ComponentCustomProperties {
-    $auth: firebase.default.auth.Auth;
+    $auth: import('@/main').Auth;
+    $snackbar: { show: (message: string, action?: { buttonText: string, onPressed: () => void }) => void}
   }
 }

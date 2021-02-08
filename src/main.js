@@ -8,6 +8,7 @@
  * 
  * @typedef {import('vue')} Vue
  * @typedef {import('vue').App} VueApp
+ * @typedef {import('vue').ComponentPublicInstance} VueInstance
  */
 
 import { createApp } from 'vue';
@@ -15,63 +16,42 @@ import App from './App.vue';
 import './registerServiceWorker';
 import { makeVueRouter } from './router';
 import { makeVueStore } from './store';
-import titleMixin from './mixins/titleMixin';
+// import titleMixin from './mixins/titleMixin';
+import snackbar from './plugins/snackbar';
 
 
 (async function () {
   const { auth, analytics, db, remoteConfig, makeAuthPlugin } = await import(/* webpackChunkName: "chunk-firebase" */ './firebase');
   await remoteConfig.fetchAndActivate()
 
+  // auth.onAuthStateChanged((user) => {
 
+    // return 
+    createMyApp({ App, auth, makeAuthPlugin, db, remoteConfig,  analytics, snackbar })
 
-  auth.onAuthStateChanged(
-    user => createMyApp({ App, user, auth, makeAuthPlugin, db, remoteConfig,  analytics, titleMixin })
-  )
+  // })
 
 })()
 
 /**
- * @param {{
- *  app: VueApp,
- *  auth: firebaseAuth, 
- * analytics: firebaseAnalytics
- * }}
  * 
- * @returns { (user: firebaseUser|null) => void }
+ * @param {{
+ *   App: VueApp,
+ *   auth: Auth,
+ *   db: Firestore,
+ *   remoteConfig: RemoteConfig,
+ *   analytics: Analytics
+ * }} 
  */
-// const boot = ({ app, analytics, auth}) => (user) => {
-//   // console.log('booting the apppppppp..........')
-
-//   if (user) {
-//     console.log('revisiter')
-//     // console.log('user: ', user)
-
-//     // Start tracking of the user...
-//     analytics.setUserId(user.uid)
-//     app.provide('user', user)
-//       .mount('#app')
-//   }
-//   // else {
-//     console.log('first time visiter'); // Signed in..
-//     auth.signInAnonymously()
-//     // app.provide('newUser', true)
-//   // }
-// }
-/**
- * 
- * @param {{
-  *   App: VueApp,
-  *   auth: Auth,
-  *   db: Firestore,
-  *   remoteConfig: RemoteConfig,
-  *   analytics: Analytics,
-  *   titleMixin: any
-  * }} 
-  */
-const createMyApp = ({ App, user, auth, makeAuthPlugin, db, remoteConfig, analytics, titleMixin }) => createApp(App)
-  .use(makeVueStore({ db, remoteConfig }))
-  .use(makeVueRouter({ auth, analytics }))
-  .use(makeAuthPlugin(auth))
-  .mixin(titleMixin)
-  .provide(user)
-  .mount('#app')
+const createMyApp = ({ App, auth, makeAuthPlugin, db, remoteConfig, analytics, snackbar }) => {
+  console.log('Authentication state changed....')
+  console.log('Recreate Vue instance')
+  return createApp(App)
+    .use(makeVueStore({ db, remoteConfig }))
+    .use(makeVueRouter({ auth, analytics }))
+    .use(makeAuthPlugin(auth))
+    .use(snackbar)
+    // .mixin(titleMixin)
+    // .provide('user', user)
+    .mount('#app')
+}

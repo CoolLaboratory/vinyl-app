@@ -20,7 +20,10 @@
 </template>
 
 <script>
+import titleMixin from '@/mixins/titleMixin'
 export default {
+  mixins: [titleMixin],
+  title: 'Login to recordMania',
   data: () => ({
     email: '',
     password: ''
@@ -32,8 +35,9 @@ export default {
       auth.signInWithEmailAndPassword(this.email, this.password)
         .then(userCredentials => {
           console.log(userCredentials)
-          this.$store.dispatch('setUser', {user: userCredentials.user})
+          this.$store.dispatch('setUser', { user: userCredentials.user })
           this.$router.push(this.$route.query.redirect)
+          this.$snackbar.show('Bravo!  You have successful signed in to your account.')
         })
         .catch(function(error) {
         // Handle Errors here.

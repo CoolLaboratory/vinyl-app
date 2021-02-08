@@ -1,5 +1,7 @@
 <template>
   <router-view/>
+
+  <snackbar />
 </template>
 
 
@@ -11,6 +13,7 @@ export default {
     console.log(this.$el.parentElement)
     document.body.removeAttribute('v-clock')
 
+    this.$snackbar.show('Welcome to record Mania')
     console.log(this.$auth.currentUser)
   }
 }

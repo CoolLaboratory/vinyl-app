@@ -62,6 +62,7 @@ export default {
   top: 0;
   width: 100%;
   box-shadow: elevation.elevation-box-shadow(4);
+  z-index: 1;
 
   .row {
     display: flex;

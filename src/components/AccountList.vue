@@ -34,9 +34,11 @@ export default {
     this.listEl.destroy()
   },
   methods: {
-    logout() { 
-      console.log(this.$auth) 
-      
+    logout() {
+      /**@type {import('@/main').Auth} auth */ 
+      const auth = this.$auth
+      auth.signOut();
+      this.$router.push({name: 'Browse'})
     }
   }
 };

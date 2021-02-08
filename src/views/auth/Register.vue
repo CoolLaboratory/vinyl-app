@@ -16,7 +16,10 @@
 </template>
 
 <script>
+import titleMixin from '@/mixins/titleMixin'
 export default {
+  mixins: [titleMixin],
+  title: 'Register to recordMania',
   data: () => ({
     email: '',
     password: ''

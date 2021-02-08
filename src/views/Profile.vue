@@ -1,12 +1,15 @@
 <template>
   <div class="profile">
-
-    <h1>Profile Page</h1>
+    <Banner v-if="!verified">
+      <p>Your Email address has not been verified.</p>
+    </Banner>
     <div class="card flat profile">
 
       <img src="" :alt="computedAlt">
 
-
+      <div>
+        <span>{{email}}</span>
+      </div>
     </div>
 
 
@@ -14,9 +17,19 @@
 </template>
 
 <script>
+import titleMixin from '@/mixins/titleMixin'
+import Banner from '@/components/Banner.vue'
 export default {
-
+  mixins: [titleMixin],
+  components: { Banner },
+  title: 'myProfile',
   computed: {
+    verified() {
+      return this.$auth.currentUser.emailVerified
+    },
+    email() {
+      return this.$auth.currentUser.email
+    },
     computedAlt() {
       return `${this.$auth.currentUser.displayName} Profile Picture`
     }

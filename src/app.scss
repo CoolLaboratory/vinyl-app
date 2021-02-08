@@ -1,6 +1,9 @@
 @use "~@material/list/mdc-list";
-@use "~@material/menu-surface/mdc-menu-surface";
 @use "~@material/menu/mdc-menu";
+@use "~@material/menu-surface/mdc-menu-surface";
+@use "~@material/button/mdc-button";
+@use "~@material/snackbar/mdc-snackbar";
+@use "~@material/banner/styles";
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
 
@@ -78,3 +81,4 @@ button {
   &:active { background: rgba(0, 0, 0, .2); }
   &:focus { background: rgba(0, 0, 0, .1); }
 }
+
